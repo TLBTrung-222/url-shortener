@@ -1,13 +1,15 @@
 import express from 'express'
-import databaseLoader from './db'
 import expressLoader from './express'
 import routesLoader from '../routes'
+import { errorMiddleware } from './middleware'
 const app = express()
 
-const appLoader = async () => {
+const appLoader = () => {
     expressLoader(app)
     routesLoader(app)
-    await databaseLoader()
+    app.use(errorMiddleware)
 }
 
-export { appLoader, app }
+appLoader()
+
+export default app

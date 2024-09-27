@@ -1,4 +1,5 @@
 import express, { Application } from 'express'
+import { errorMiddleware } from './middleware'
 
 const expressLoader = (app: Application) => {
     // parse json request body
