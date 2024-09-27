@@ -1,0 +1,7 @@
+### Create the shorten url
+POST http://localhost:3000/urls/
+Content-Type: application/json
+
+{
+    "fullUrl": "https://github.com/TLBTrung-222/ecommerce-mern/blob/main/server/src/types/common/Response.type.ts"
+}
