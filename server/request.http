@@ -3,8 +3,16 @@ POST http://localhost:3000/urls/
 Content-Type: application/json
 
 {
-    "originalUrl": "https://github.com/TLBTrung-222/ecommerce-mern/blob/main/server/src/types/common/Response.type.ts"
+    "originalUrl": "https://www.google.com/"
 }
 
-### Get the original url
-GET http://localhost:3000/urls/909576
+### Get original url base on url code
+GET http://localhost:3000/urls/1aaba9
+
+
+### Get all url
+GET http://localhost:3000/urls/
+
+
+### Delete all url
+DELETE http://localhost:3000/urls

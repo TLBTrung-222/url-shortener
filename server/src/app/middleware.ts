@@ -7,13 +7,11 @@ export const errorMiddleware = (
     res: Response,
     next: NextFunction
 ) => {
-    console.log('[error middleware] error: ', error)
     let status = 500
     if (error instanceof ApiError) {
         status = error.statusCode
     }
     const errorMessage = error?.message || 'Internal Server Error'
-    console.log('hello error', errorMessage)
     const response: ApiResponse = { success: false, error: errorMessage }
     res.status(status).json(response)
 }
