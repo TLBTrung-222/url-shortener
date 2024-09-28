@@ -1,6 +1,7 @@
 import React from 'react'
 import { getUrls } from '../services/UrlService'
 import { UrlList as UrlListType } from '../types'
+import { List, ListItem, ListItemText, Paper, Typography } from '@mui/material'
 
 function UrlList() {
     const [urlList, setUrlList] = React.useState<UrlListType | null>(null)
@@ -14,18 +15,19 @@ function UrlList() {
     }, [])
 
     return (
-        <div>
-            {urlList &&
-                urlList.urls.map((url) => {
-                    return (
-                        <>
-                            <li>
-                                {url.originalUrl} - {url.urlCode}
-                            </li>
-                        </>
-                    )
-                })}
-        </div>
+        <Paper sx={{ padding: 2, marginTop: 2, width: '900px' }}>
+            <Typography variant="h5" gutterBottom>
+                URL List
+            </Typography>
+            <List>
+                {urlList &&
+                    urlList.urls.map((url) => (
+                        <ListItem key={url.urlCode} divider>
+                            <ListItemText primary={url.originalUrl} secondary={`Short URL Code: ${url.urlCode}`} />
+                        </ListItem>
+                    ))}
+            </List>
+        </Paper>
     )
 }
 

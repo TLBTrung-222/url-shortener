@@ -8,8 +8,9 @@ function InputForm() {
         errorMessage: null as string | null,
         isSuccess: false,
         isLoading: false,
-        shortUrl: null as string | null
+        uniqueCode: null as string | null
     })
+    const [shortenedUrl, setShortenedUrl] = React.useState<string | null>(null)
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -30,8 +31,9 @@ function InputForm() {
                 errorMessage: null,
                 isSuccess: true,
                 isLoading: false,
-                shortUrl: apiResponse.data.shortUrl
+                uniqueCode: apiResponse.data.uniqueCode
             })
+            setShortenedUrl(`${import.meta.env.VITE_CLIENT_URL}/${apiResponse.data.uniqueCode}`)
             /* eslint-disable @typescript-eslint/no-explicit-any */
         } catch (error: any) {
             setState({
@@ -39,14 +41,14 @@ function InputForm() {
                 errorMessage: error.message,
                 isSuccess: false,
                 isLoading: false,
-                shortUrl: null
+                uniqueCode: null
             })
         }
     }
 
     const handleCopyToClipboard = () => {
-        if (state.shortUrl) {
-            navigator.clipboard.writeText(state.shortUrl)
+        if (shortenedUrl) {
+            navigator.clipboard.writeText(shortenedUrl)
             alert('Short URL copied to clipboard!')
         }
     }
@@ -65,11 +67,11 @@ function InputForm() {
             />
 
             {state.isError && <Box sx={{ color: 'red', mt: 2 }}>{state.errorMessage}</Box>}
-            {state.isSuccess && (
+            {state.isSuccess && shortenedUrl && (
                 <Box sx={{ color: 'green', mt: 2 }}>
                     URL shortened successfully! <br />
-                    <a href={state.shortUrl || '/'} target="_blank" rel="noopener noreferrer">
-                        {state.shortUrl}
+                    <a href={shortenedUrl || '/'} target="_blank" rel="noopener noreferrer">
+                        {shortenedUrl}
                     </a>
                     <Button onClick={handleCopyToClipboard} sx={{ ml: 2 }}>
                         Copy to Clipboard
