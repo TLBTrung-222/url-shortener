@@ -1,0 +1,27 @@
+### Create the shorten url
+POST http://localhost:3000/urls/
+Content-Type: application/json
+
+{
+    "originalUrl": "https://www.google.com/",
+    "password": "hellozz"
+}
+
+### Check if a url code require password
+GET http://localhost:3000/urls/980528
+
+### Get original URL with password
+GET http://localhost:3000/urls/f365a9/password
+Content-Type: application/json
+
+{
+    "password": "hehehe"
+}
+
+
+### Get all url
+GET http://localhost:3000/urls/
+
+
+### Delete all url
+DELETE http://localhost:3000/urls
