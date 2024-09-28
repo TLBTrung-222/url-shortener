@@ -1,0 +1,18 @@
+### Create the shorten url
+POST http://localhost:3000/urls/
+Content-Type: application/json
+
+{
+    "originalUrl": "https://www.google.com/"
+}
+
+### Get original url base on url code
+GET http://localhost:3000/urls/bf723d
+
+
+### Get all url
+GET http://localhost:3000/urls/
+
+
+### Delete all url
+DELETE http://localhost:3000/urls
