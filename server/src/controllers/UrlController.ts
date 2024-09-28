@@ -86,12 +86,12 @@ export const isRequirePassword: Controller = async (req, res, next) => {
 
         // no password required, redirect...
         if (!urlDocument.password)
-            res.status(200).json({
+            return res.status(200).json({
                 requirePassword: false,
                 originalUrl: urlDocument.originalUrl
             })
         // password required, inform FE
-        else res.status(401).json({ requirePassword: true })
+        else return res.status(200).json({ requirePassword: true })
     } catch (error) {
         handleApiError(error, next)
     }
