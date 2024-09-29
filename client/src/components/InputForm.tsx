@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box, Button, CircularProgress, TextField } from '@mui/material'
+import { Box, Button, CircularProgress, TextField, Typography } from '@mui/material'
 import { shortenUrl } from '../services/UrlService'
 
 function InputForm() {
@@ -18,12 +18,13 @@ function InputForm() {
         // create FormData
         const formData = new FormData(e.currentTarget)
         const originalUrl = formData.get('url')
+        const password = formData.get('password') ? (formData.get('password') as string) : null
 
-        // call BE API
+        // // call BE API
         try {
             setState((prevState) => ({ ...prevState, isLoading: true }))
 
-            const apiResponse = await shortenUrl(originalUrl as string)
+            const apiResponse = await shortenUrl(originalUrl as string, password)
 
             setState({
                 isError: false,
@@ -58,13 +59,20 @@ function InputForm() {
             onSubmit={handleSubmit}
             sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}
         >
+            <Typography variant="h5">Put URL here:</Typography>
             <TextField
                 sx={{ width: 500, maxWidth: '100%', m: 2 }}
                 fullWidth
                 name="url"
                 label="Paste your long url here..."
             />
-
+            <Typography variant="h5">(optional) Restrict with password:</Typography>
+            <TextField
+                sx={{ width: 500, maxWidth: '100%', m: 2 }}
+                fullWidth
+                name="password"
+                label="Fill in password for this url..."
+            />
             {state.isError && <Box sx={{ color: 'red', mt: 2 }}>{state.errorMessage}</Box>}
             {state.isSuccess && shortenedUrl && (
                 <Box sx={{ color: 'green', mt: 2 }}>

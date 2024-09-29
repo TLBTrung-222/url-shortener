@@ -1,12 +1,12 @@
 import { ApiResponse } from '../types'
 
-export const shortenUrl = async (originalUrl: string) => {
+export const shortenUrl = async (originalUrl: string, password: string | null) => {
     const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/urls`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ originalUrl })
+        body: JSON.stringify({ originalUrl, password })
     })
 
     return handleApiResponse(response)
