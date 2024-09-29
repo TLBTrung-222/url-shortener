@@ -25,7 +25,6 @@ function InputForm() {
 
             const apiResponse = await shortenUrl(originalUrl as string)
 
-            console.log('data from response body: ', apiResponse.data)
             setState({
                 isError: false,
                 errorMessage: null,

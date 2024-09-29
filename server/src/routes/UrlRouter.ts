@@ -12,7 +12,7 @@ UrlRouter.post(
     UrlController.shortenUrl
 )
 UrlRouter.delete('/', UrlController.deleteUrls)
-UrlRouter.get('/:urlCode/password', UrlController.getUrlWithPassword)
+UrlRouter.post('/:urlCode/password', UrlController.getUrlWithPassword)
 UrlRouter.get('/:urlCode', UrlController.isRequirePassword)
 
 export default UrlRouter

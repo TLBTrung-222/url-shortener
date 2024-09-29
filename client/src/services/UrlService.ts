@@ -24,6 +24,18 @@ export const checkPasswordRequired = async (urlCode: string) => {
     return handleApiResponse(response)
 }
 
+export const submitPassword = async (urlCode: string, password: string) => {
+    const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/urls/${urlCode}/password`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ password })
+    })
+    console.log(`${import.meta.env.VITE_SERVER_URL}/urls/${urlCode}/password`)
+    return handleApiResponse(response)
+}
+
 // Helper function to handle API response
 const handleApiResponse = async (response: Response): Promise<ApiResponse> => {
     const responseBody: ApiResponse = await response.json()
