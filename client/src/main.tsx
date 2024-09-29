@@ -3,11 +3,16 @@ import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import RedirectUrl from './components/RedirectUrl.tsx'
+import NotFound from './components/NotFound.tsx'
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <App />
+    },
+    {
+        path: '/not-found',
+        element: <NotFound />
     },
     {
         path: '/:urlCode',
