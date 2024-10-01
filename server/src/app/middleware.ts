@@ -17,6 +17,7 @@ export const errorMiddleware = (
     res.status(status).json(response)
 }
 
+// join all error to a single string
 export const handleValidatationErrors = (
     req: Request,
     res: Response,

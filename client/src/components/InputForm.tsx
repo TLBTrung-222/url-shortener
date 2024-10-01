@@ -19,12 +19,13 @@ function InputForm() {
         const formData = new FormData(e.currentTarget)
         const originalUrl = formData.get('url')
         const password = formData.get('password') ? (formData.get('password') as string) : null
+        const expireAt = new Date(formData.get('expireAt') as string) || null
 
-        // // call BE API
+        // call BE API
         try {
             setState((prevState) => ({ ...prevState, isLoading: true }))
 
-            const apiResponse = await shortenUrl(originalUrl as string, password)
+            const apiResponse = await shortenUrl(originalUrl as string, password, expireAt)
 
             setState({
                 isError: false,
@@ -73,6 +74,8 @@ function InputForm() {
                 name="password"
                 label="Fill in password for this url..."
             />
+            <Typography variant="h5">(optional) Expire at:</Typography>
+            <TextField type="datetime-local" sx={{ width: 500, maxWidth: '100%', m: 2 }} fullWidth name="expireAt" />
             {state.isError && <Box sx={{ color: 'red', mt: 2 }}>{state.errorMessage}</Box>}
             {state.isSuccess && shortenedUrl && (
                 <Box sx={{ color: 'green', mt: 2 }}>

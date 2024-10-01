@@ -14,9 +14,14 @@ const urlSchema = new Schema({
     password: {
         type: String
     },
+
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    expireAt: {
+        type: Date,
+        expires: 0
     }
 })
 

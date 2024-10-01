@@ -1,12 +1,12 @@
 import { ApiResponse } from '../types'
 
-export const shortenUrl = async (originalUrl: string, password: string | null) => {
+export const shortenUrl = async (originalUrl: string, password: string | null, expireAt: Date | null) => {
     const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/urls`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ originalUrl, password })
+        body: JSON.stringify({ originalUrl, password, expireAt })
     })
 
     return handleApiResponse(response)
@@ -32,7 +32,6 @@ export const submitPassword = async (urlCode: string, password: string) => {
         },
         body: JSON.stringify({ password })
     })
-    console.log(`${import.meta.env.VITE_SERVER_URL}/urls/${urlCode}/password`)
     return handleApiResponse(response)
 }
 

@@ -12,6 +12,7 @@ export interface UrlList {
             originalUrl: string
             urlCode: string
             createdAt: Date
+            expireAt: Date
         }
     ]
 }
