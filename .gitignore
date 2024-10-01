@@ -19,9 +19,6 @@ yarn-error.log*
 .vscode/
 .idea/
 
-# Prettier
-.prettierrc
-
 # MacOS
 .DS_Store
 
