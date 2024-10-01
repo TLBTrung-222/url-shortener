@@ -1,4 +1,4 @@
-import { body } from 'express-validator'
+import { body, param } from 'express-validator'
 import UrlModel from '../models/url.model'
 
 export const shortenUrlValidationRules = [
@@ -29,10 +29,16 @@ export const shortenUrlValidationRules = [
         .isLength({ max: 255 })
         .withMessage('Custom code too long')
         .custom(async (customCode) => {
-            const exsitCustomCode = await UrlModel.find({ urlCode: customCode })
+            const exsitCustomCode = await UrlModel.findOne({
+                urlCode: customCode
+            })
             if (exsitCustomCode)
                 throw new Error('The custom code already been used')
         })
+]
+
+export const urlCodeValidationRules = [
+    param('urlCode').isString().withMessage('urlCode must be a string').escape()
 ]
 // export const urlCodeValidationRules = [
 //     param('urlCode').isString().withMessage('URL code must be a string')
