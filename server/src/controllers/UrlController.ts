@@ -18,9 +18,10 @@ async function generateShortCode(length: number = 8) {
 
 export const shortenUrl: Controller = async (req, res, next) => {
     try {
-        const { originalUrl, password, expireAt } = req.body
-
-        let uniqueUrlCode = await generateShortCode(3) // 3 bytes => 6 hex character
+        const { originalUrl, password, expireAt, customCode } = req.body
+        let uniqueUrlCode
+        if (customCode) uniqueUrlCode = customCode
+        else uniqueUrlCode = await generateShortCode(3) // 3 bytes => 6 hex character
 
         const newUrl = new UrlModel({
             originalUrl: originalUrl,

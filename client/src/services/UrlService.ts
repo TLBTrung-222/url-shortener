@@ -1,12 +1,28 @@
 import { ApiResponse } from '../types'
 
-export const shortenUrl = async (originalUrl: string, password: string | null, expireAt: Date | null) => {
+export const shortenUrl = async (
+    originalUrl: string,
+    password: string | null,
+    expireAt: Date | null,
+    customCode: string | null
+) => {
+    const requestBody: {
+        originalUrl: string
+        password?: string | null
+        expireAt?: Date | null
+        customCode?: string | null
+    } = { originalUrl }
+
+    if (password) requestBody.password = password
+    if (expireAt) requestBody.expireAt = expireAt
+    if (customCode) requestBody.customCode = customCode
+
     const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/urls`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ originalUrl, password, expireAt })
+        body: JSON.stringify(requestBody)
     })
 
     return handleApiResponse(response)

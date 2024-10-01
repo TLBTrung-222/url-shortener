@@ -20,10 +20,14 @@ export const shortenUrlValidationRules = [
             const now = new Date()
             return !isNaN(date.getTime()) && date.getTime() >= now.getTime() // Check if it's a valid date
         })
-        .withMessage('Expire time must be a date and not in the past')
-    // .isDate()
+        .withMessage('Expire time must be a date and not in the past'),
+    body('customCode')
+        .optional()
+        .isString()
+        .withMessage('Custom code must be a string')
+        .isLength({ max: 255 })
+        .withMessage('Custom code too long')
 ]
-
 // export const urlCodeValidationRules = [
 //     param('urlCode').isString().withMessage('URL code must be a string')
 // ]
