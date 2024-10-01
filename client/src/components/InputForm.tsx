@@ -40,7 +40,7 @@ function InputForm() {
         } catch (error: any) {
             setState({
                 isError: true,
-                errorMessage: error.message,
+                errorMessage: error.message || 'Error occur',
                 isSuccess: false,
                 isLoading: false,
                 uniqueCode: null
