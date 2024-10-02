@@ -59,3 +59,5 @@ const handleApiResponse = async (response: Response): Promise<ApiResponse> => {
     }
     return responseBody
 }
+
+console.log('Add something to trigger redeploy again')

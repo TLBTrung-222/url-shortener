@@ -1,7 +1,17 @@
 import React from 'react'
 import { getUrls } from '../services/UrlService'
 import { UrlList as UrlListType } from '../types'
-import { Paper, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import {
+    Paper,
+    Typography,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Chip
+} from '@mui/material'
 
 function UrlList() {
     const [urlList, setUrlList] = React.useState<UrlListType | null>(null)
@@ -13,6 +23,10 @@ function UrlList() {
         }
         fetchUrlList()
     }, [])
+
+    const handleChipClick = (urlCode: string) => {
+        window.location.href = `${import.meta.env.VITE_CLIENT_URL}/${urlCode}`
+    }
 
     return (
         <Paper sx={{ padding: 1, marginTop: 2, width: '100%', overflow: 'hidden', boxShadow: 3 }}>
@@ -34,7 +48,9 @@ function UrlList() {
                             urlList.urls.map((url) => (
                                 <TableRow key={url.urlCode}>
                                     <TableCell>{url.originalUrl}</TableCell>
-                                    <TableCell>{url.urlCode}</TableCell>
+                                    <TableCell>
+                                        <Chip label={url.urlCode} onClick={() => handleChipClick(url.urlCode)} />
+                                    </TableCell>
                                     <TableCell>{new Date(url.createdAt).toLocaleString()}</TableCell>
                                     <TableCell>
                                         {url.expireAt ? new Date(url.expireAt).toLocaleString() : 'N/A'}

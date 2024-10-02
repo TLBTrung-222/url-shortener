@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from '@mui/material'
+import { Container, Typography } from '@mui/material'
 import InputForm from './components/InputForm'
 import UrlList from './components/UrlList'
 
