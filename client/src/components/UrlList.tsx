@@ -10,15 +10,20 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    Chip
+    Chip,
+    Skeleton,
+    Box
 } from '@mui/material'
 
 function UrlList() {
     const [urlList, setUrlList] = React.useState<UrlListType | null>(null)
+    const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
     React.useEffect(() => {
         const fetchUrlList = async () => {
+            setIsLoading(true)
             const apiResponse = await getUrls()
+            setIsLoading(false)
             setUrlList(apiResponse.data)
         }
         fetchUrlList()
@@ -33,33 +38,42 @@ function UrlList() {
             <Typography variant="h5" gutterBottom>
                 URL List
             </Typography>
-            <TableContainer sx={{ maxHeight: 440 }}>
-                <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Original URL</TableCell>
-                            <TableCell>Unique Code</TableCell>
-                            <TableCell>Created At</TableCell>
-                            <TableCell>Expire At</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {urlList &&
-                            urlList.urls.map((url) => (
-                                <TableRow key={url.urlCode}>
-                                    <TableCell>{url.originalUrl}</TableCell>
-                                    <TableCell>
-                                        <Chip label={url.urlCode} onClick={() => handleChipClick(url.urlCode)} />
-                                    </TableCell>
-                                    <TableCell>{new Date(url.createdAt).toLocaleString()}</TableCell>
-                                    <TableCell>
-                                        {url.expireAt ? new Date(url.expireAt).toLocaleString() : 'N/A'}
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+
+            {isLoading ? (
+                <Box>
+                    <Skeleton animation="wave" />
+                    <Skeleton animation="wave" />
+                    <Skeleton animation="wave" />
+                </Box>
+            ) : (
+                <TableContainer sx={{ maxHeight: 440 }}>
+                    <Table stickyHeader aria-label="sticky table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Original URL</TableCell>
+                                <TableCell>Unique Code</TableCell>
+                                <TableCell>Created At</TableCell>
+                                <TableCell>Expire At</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {urlList &&
+                                urlList.urls.map((url) => (
+                                    <TableRow key={url.urlCode}>
+                                        <TableCell>{url.originalUrl}</TableCell>
+                                        <TableCell>
+                                            <Chip label={url.urlCode} onClick={() => handleChipClick(url.urlCode)} />
+                                        </TableCell>
+                                        <TableCell>{new Date(url.createdAt).toLocaleString()}</TableCell>
+                                        <TableCell>
+                                            {url.expireAt ? new Date(url.expireAt).toLocaleString() : 'N/A'}
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            )}
         </Paper>
     )
 }
