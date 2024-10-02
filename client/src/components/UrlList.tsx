@@ -15,7 +15,7 @@ function UrlList() {
     }, [])
 
     return (
-        <Paper sx={{ padding: 2, marginTop: 2, width: '100%', overflow: 'hidden', boxShadow: 3 }}>
+        <Paper sx={{ padding: 1, marginTop: 2, width: '100%', overflow: 'hidden', boxShadow: 3 }}>
             <Typography variant="h5" gutterBottom>
                 URL List
             </Typography>

@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { Box, Button, CircularProgress, TextField, Typography } from '@mui/material'
+import { Box, Button, CircularProgress, IconButton, Link, TextField, Tooltip, Typography } from '@mui/material'
 import { shortenUrl } from '../services/UrlService'
-
+import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 function InputForm() {
     const [state, setState] = React.useState({
         isError: false,
@@ -61,34 +61,42 @@ function InputForm() {
             onSubmit={handleSubmit}
             sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}
         >
-            <Typography variant="h5">Put URL here:</Typography>
+            <Typography variant="h6">Put URL here:</Typography>
             <TextField
                 sx={{ width: 500, maxWidth: '100%', m: 2 }}
                 fullWidth
                 name="url"
                 label="Paste your long url here..."
             />
-            <Typography variant="h5">(optional) Restrict with password:</Typography>
+            <Typography variant="h6">(optional) Restrict with password:</Typography>
             <TextField
                 sx={{ width: 500, maxWidth: '100%', m: 2 }}
                 fullWidth
                 name="password"
                 label="Fill in password for this url..."
             />
-            <Typography variant="h5">(optional) Expire at:</Typography>
+            <Typography variant="h6">(optional) Expire at:</Typography>
             <TextField type="datetime-local" sx={{ width: 500, maxWidth: '100%', m: 2 }} fullWidth name="expireAt" />
-            <Typography variant="h5">(optional) Custom shortcode:</Typography>
+            <Typography variant="h6">(optional) Custom shortcode:</Typography>
             <TextField sx={{ width: 500, maxWidth: '100%', m: 2 }} fullWidth name="customCode" />
             {state.isError && <Box sx={{ color: 'red', mt: 2 }}>{state.errorMessage}</Box>}
             {state.isSuccess && shortenedUrl && (
-                <Box sx={{ color: 'green', mt: 2 }}>
-                    URL shortened successfully! <br />
-                    <a href={shortenedUrl || '/'} target="_blank" rel="noopener noreferrer">
-                        {shortenedUrl}
-                    </a>
-                    <Button onClick={handleCopyToClipboard} sx={{ ml: 2 }}>
-                        Copy to Clipboard
-                    </Button>
+                <Box sx={{ color: 'green', m: 2 }}>
+                    <Typography variant="body1" gutterBottom>
+                        URL shortened successfully!
+                    </Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 3, justifyContent: 'center' }}>
+                        <Typography variant="body1" gutterBottom>
+                            <Link href={shortenedUrl || '/'} target="_blank" rel="noopener noreferrer">
+                                {shortenedUrl}
+                            </Link>
+                        </Typography>
+                        <Tooltip title="Copy to clipboard">
+                            <IconButton onClick={handleCopyToClipboard}>
+                                <ContentCopyIcon />
+                            </IconButton>
+                        </Tooltip>
+                    </Box>
                 </Box>
             )}
             <Button type="submit" variant="contained" sx={{ m: 2 }} disabled={state.isLoading}>
