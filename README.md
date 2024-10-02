@@ -1,8 +1,16 @@
 # URL Shortener
 
-This project is a URL shortener application built with a React frontend and an Express backend. It allows users to shorten URLs, protect them with passwords, and manage them through a RESTful API.
+This project is a URL shortener application built with a React frontend and an Express backend. It allows users to shorten URLs, protect them with passwords
 
-> **Important:** For demo purposes, the original URL is displayed directly on the home page. For normal usage, you should exclude the original URL property from the response object sent from the server to the client.
+> **Important:** For demo purposes, the original URL is displayed directly on the home page. For normal usage with 'real' user, I will exclude the original URL property from the response object sent from the server to the client.
+
+## Demo
+
+![Demo Screenshot](./client/public/demo.png)
+
+## Live Demo
+
+Try out the live demo of the URL Shortener Web Application [here](https://url-shortener-one-virid.vercel.app/).
 
 ## Setup Instructions
 
@@ -74,31 +82,29 @@ This project is a URL shortener application built with a React frontend and an E
 -   **Frontend**: React with TypeScript, Vite for bundling, and React Router for routing.
 -   **Backend**: Express with TypeScript for type-safety, Mongoose for MongoDB interactions, and express-validator for request validation.
 -   **Styling**: Material-UI for UI components.
--   **Linting**: ESLint with TypeScript support.
 
 ## Completed Features
 
--   URL shortening
--   Password protection for URLs
--   Custom shortcode
--   Specify expire date for certain urls
+-   Create an API endpoint to receive long URLs and return shortened versions
+-   Implement a redirect service to handle requests for shortened URLs
+-   Generate unique short codes for each submitted URL
+-   Allow duplicate long URLs
+-   Password protection for URLs: Allow users to set a password for accessing certain
+    shortened URLs
+-   Custom short code: Allow users to specify their own custom short codes
+-   URL Expiry Date: Enable users to set an expiration date for shortened URLs
 -   Basic frontend for interacting with the API
--   Environment variable management
 
 ## Known Issues or Limitations
 
--   The frontend does not have error handling
--   The backend does not have comprehensive test coverage.
+-   _Important_: react-router is works smoothly on development, but in vercel, it won't work (i.e every route rather than root will throw not-found error), to fix this issue, we need to add a `vercel.json` file with `rewrites` property, for more detail please read [here](https://stackoverflow.com/questions/64815012/react-router-app-works-in-dev-but-not-after-vercel-deployment)
+-   The frontend does not have error handling (all error handling process at the moment is base on backend)
 -   The password protection feature does not support advanced hashing mechanisms.
--   The application does not support user authentication and authorization.
 
 ## Ideas for Future Improvements
 
--   Use `react-query` for
+-   Use `react-query` to reduce repeative code when fetching resource, also for better performance
 -   Implement user authentication and authorization.
+-   Implement CRUD interactions for user to manage their urls
 -   Add comprehensive error handling on the frontend.
 -   Improve the password protection feature with hashing mechanisms.
--   Add test coverage for both frontend and backend.
--   Implement a more sophisticated UI/UX for the frontend.
--   Add analytics to track URL usage.
--   Implement rate limiting to prevent abuse of the URL shortening service.
