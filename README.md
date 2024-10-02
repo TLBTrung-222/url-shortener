@@ -77,6 +77,8 @@ Try out the live demo of the URL Shortener Web Application [here](https://url-sh
     yarn dev
     ```
 
+Navigate to FE server at: http://localhost:5173/
+
 ## Technology Choices
 
 -   **Frontend**: React with TypeScript, Vite for bundling, and React Router for routing.
@@ -93,7 +95,6 @@ Try out the live demo of the URL Shortener Web Application [here](https://url-sh
     shortened URLs
 -   Custom short code: Allow users to specify their own custom short codes
 -   URL Expiry Date: Enable users to set an expiration date for shortened URLs
--   Basic frontend for interacting with the API
 
 ## Known Issues or Limitations
 
