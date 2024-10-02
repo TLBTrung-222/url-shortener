@@ -18,7 +18,7 @@ function Password() {
         const password = formData.get('password') as string
 
         try {
-            setState((prev) => ({ ...prev, isLoading: true }))
+            setState((prev) => ({ ...prev, isError: false, isLoading: true }))
             const apiResonse = await submitPassword(urlCode as string, password)
             setState((prev) => ({ ...prev, isLoading: false, isSuccess: true }))
             if (apiResonse.success) {
