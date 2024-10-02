@@ -41,9 +41,9 @@ function UrlList() {
 
             {isLoading ? (
                 <Box>
-                    <Skeleton animation="wave" />
-                    <Skeleton animation="wave" />
-                    <Skeleton animation="wave" />
+                    <Skeleton animation="wave" sx={{ height: '30px' }} />
+                    <Skeleton animation="wave" sx={{ height: '30px' }} />
+                    <Skeleton animation="wave" sx={{ height: '30px' }} />
                 </Box>
             ) : (
                 <TableContainer sx={{ maxHeight: 440 }}>
