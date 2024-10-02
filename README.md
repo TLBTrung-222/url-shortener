@@ -80,20 +80,21 @@ This project is a URL shortener application built with a React frontend and an E
 
 -   URL shortening
 -   Password protection for URLs
--   RESTful API for managing URLs
+-   Custom shortcode
+-   Specify expire date for certain urls
 -   Basic frontend for interacting with the API
 -   Environment variable management
--   Linting and formatting setup
 
 ## Known Issues or Limitations
 
--   The frontend does not have error handling.
+-   The frontend does not have error handling
 -   The backend does not have comprehensive test coverage.
 -   The password protection feature does not support advanced hashing mechanisms.
 -   The application does not support user authentication and authorization.
 
 ## Ideas for Future Improvements
 
+-   Use `react-query` for
 -   Implement user authentication and authorization.
 -   Add comprehensive error handling on the frontend.
 -   Improve the password protection feature with hashing mechanisms.
